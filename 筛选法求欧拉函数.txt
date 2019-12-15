@@ -1,0 +1,21 @@
+int phi[1000010];
+
+void init()
+{
+    int i,j;
+    memset ( phi , 0 ,sizeof ( phi ) ) ;
+    phi[1]=1;
+    for ( i = 2 ; i < 1000010 ; i ++ )//筛选求phi
+        if ( ! phi [i] )
+        {
+            for ( j = i ; j < 1000010 ; j += i )
+            {
+                if ( ! phi [j] )
+                    phi [j ] = j ;
+                phi [j] = phi [j] / i * ( i - 1 ) ;
+            }
+        }
+}
+
+
+用于快速打表，以防止时间超限

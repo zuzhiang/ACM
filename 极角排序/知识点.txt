@@ -1,0 +1,32 @@
+纯粹叉积是不能排360度的
+
+极角排序用atan2可能会伤精度
+
+atan2的参数是向量的y坐标，x坐标，排序范围是(-180,+180]
+
+象限排序是不损精度的，因为只用到叉积还有一些比较而已。
+先判断两个点是在哪两个象限，然后如果不在同一个象限，直接象限比较，如果在同一个象限，那么用叉积比较即可（注意考虑边界）
+
+象限极角排序代码：
+
+int quad(point a)// 判断象限的函数，每个象限包括半个坐标轴   
+{  
+    if( dy(a.x,0) && xyd(a.y,0) ) return 1;  
+    if( xyd(a.x,0) && dy(a.y,0) ) return 2;  
+    if( xy(a.x,0) && xyd(a.y,0) ) return 3;  
+    if( dyd(a.x,0) && xy(a.y,0) ) return 4;  
+}   
+bool cmp(point& a,point& b)    
+{    
+    point p1 = a,p2 = b;  
+    p1.x -= C.x; p1.y -= C.y;  
+    p2.x -= C.x; p2.y -= C.y;  
+    int l1,l2;  
+    l1 = quad(p1); l2 = quad(p2);  
+    if( l1 == l2 )  
+    {  
+        double c = crossProduct(C,a,b);  
+        return xy(c,0) || dd(c,0.0) && xy(fabs(a.x),fabs(b.x));  
+    }  
+    return l1 < l2;  
+}   

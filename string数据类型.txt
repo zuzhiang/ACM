@@ -1,0 +1,63 @@
+string数据类型，使用是需要引入头文件 #include<string>
+
+
+声明：
+string s;
+
+
+初始化:
+string s="abcd";   或者   string s="a  b   cd";
+
+
+读入:
+cin>>s;           //不能读入空格
+getline(cin,s);   //可以读入空格
+
+
+求长度：
+int len=s.size();    或者     int len=s.length();
+
+
+求下标为i的字符:
+s[i]        或        char c=s.at(i)
+
+
+查找是否为子串:
+s.find(t); 如果t是s的子串则返回首次匹配的位置，否则返回 string::npos 或 -1
+
+
+取s的子串：
+string sub=s.substr(pos,len); pos是子串开始的位置，len是子串的长度
+
+
+字符数组转string类型:
+s=str;
+
+
+string类型转字符数组:
+strcpy(str,s.c_str()); //需要引用string.h头文件
+
+
+两个string比较大小：
+if(s1<s2);       或       s1.compare(s2); 相等时返回0；s1>s2时返回1，s1<s2时返回-1
+
+
+判断两个string是否相同
+s==t 或 s!=t
+
+
+两个string连接：
+s1=s1+s2;        或       s1.append(s2);
+
+
+对string类型数组排序
+sort(s,s+n,cmp);
+
+int cmp(string a,string b)
+{
+	return a<b; //或a>b;
+}
+
+
+利用algorithm头文件中的 reverse函数将 s反转： reverse(s.begin(),s.end()); 无返回值
+

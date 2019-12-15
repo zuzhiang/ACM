@@ -1,0 +1,40 @@
+设多边形共有n个点，每个点的坐标分别为 (x1,y1),(x2,y2),(x3,y3),…，(xn,yn),则该多边形的面积公式为：
+0.5[(x1*y2-x2*y1)+(x2*y3-x3*y2)+(x3*y4-x4*y3)+…+（x(n-1)*yn-xn*y(n-1))]
+
+多边形计算公式的计算和原点的选取没有关系，通常可以选点（0,0）或者多边形的第一个点（这个时候比较直观了，看起来就是把多边形分成一个个三角形和加起来）就可以了。
+
+
+代码：
+#include<stdio.h>
+#include<math.h>
+
+struct point  //结构体，保存点的坐标
+{
+	double x,y;
+} p[1000];
+
+double det(point p0,point p1,point p2) //计算向量的叉乘
+{
+	return (p1.x-p0.x)*(p2.y-p0.y)-(p1.y-p0.y)*(p2.x-p0.x);
+}
+
+double Area(int n)  //计算多边形的面积
+{
+	double s=0;
+	int i;
+	for(i=2;i<n;i++)
+		s+=det(p[0],p[i-1],p[i]);
+	return 0.5*fabs(s);
+}
+
+int main()
+{
+	int i,n;  //n为点的个数
+	double area;
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+		scanf("%lf %lf",&p[i].x,&p[i].y);
+	area=Area(n);
+	printf("area=%lf\n",area);
+	return 0;
+}

@@ -1,0 +1,53 @@
+set为集合容器，里面的元素唯一，所有元素自动按升序排列
+引用头文件#include<set>
+
+
+声明：
+set<数据类型> st; //按升序排列
+set<int,greater<int>> st; //按降序排列
+
+结构体类型的集合:
+struct node
+{
+    int x,y;
+};
+
+bool operater<(node a,node b)
+{ //要定义运算符重载，以判断元素大小
+    if(a.x==b.x) return a.y<b.y;
+    return a.x<b.x;
+}
+
+set<node> st;
+
+
+插入元素a：
+st.insert(a);
+
+获取容器大小：
+int size=st.size();
+
+清空容器：
+st.clear();
+
+判断容器是否为空：
+st.empty();
+
+判断元素a是否在容器中：
+int n=st.count(a);
+
+删除某个元素:
+st.erase(it); //其中it为迭代器
+  
+定义迭代器：
+set<int>:: iterator it;  //可以自增或自减
+
+利用迭代器遍历所有元素：
+for(it=st.begin();it!=st.end();it++)  
+{  
+    cout<< *it <<"  ";  
+}
+
+在集合st中二分搜索x：
+set<int>:: iterator pos;
+pos=st.lower_bound(x);

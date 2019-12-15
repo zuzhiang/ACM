@@ -1,0 +1,19 @@
+堆栈：
+#include<stack> //堆栈所在的头文件
+
+stack<数据类型>S;  //创建一个堆栈S
+S.push(x);  //往S堆栈里插入一个元素x
+S.pop();  //删除S堆栈的栈顶元素
+S.size();  //返回S堆栈的大小
+S.empty();  //S堆栈是否为空
+S.top();  //返回S堆栈的栈顶元素
+
+
+队列：
+#include<queue> //队列所在的头文件
+queue<数据类型>Q;  //创建一个队列Q
+Q.push(x);  //往Q队列中插入一个元素x
+Q.pop();  //删除Q队列顶部元素
+Q.size();  //返回Q队列的大小
+Q.empty();  //Q队列是否为空
+Q.front();  //返回Q队列的顶部元素

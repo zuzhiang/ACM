@@ -1,0 +1,17 @@
+http://blog.sina.com.cn/s/blog_700906660100v7vb.html
+
+割：在一个图G（V，E）中V是点集，E是边集。在E中去掉一个边集C使得G（V，E-C）不连通，C就是图G（V，E）的一个割；
+
+最小割：在G（V，E）的所有割中，边权总和最小的割就是最小割。
+
+求G的任意s-t最小割Min-C（s，t）：
+
+设s，t是途中的两个点且边（s，t）∈E（即s，t之间存在一条边）。如果G的最小割Cut把G分成M，N两个点集
+
+①：如果s∈M，t∈N则Min-C（s，t）= Cut（不讨论）
+
+②：如果s，t∈M（或者s，t∈N）则Min-C（s，t）<= Cut
+
+
+
+

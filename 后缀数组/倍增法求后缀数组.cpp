@@ -1,0 +1,107 @@
+/*
+rk[i]=j表示从第i个字符开始的后缀排第j
+sa[j]=i表示排第j的是从第i个字符开始的后缀
+所以:rk[sa[j]]=j;  sa[[rk[i]]]=i;
+注：这个结论只在最后完成排序的时候符合。
+*/
+#include<stdio.h>
+#include<string>
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+#define MAX 100010
+
+int n,k; //n 为主串长度 
+int rk[MAX+1]; //名次数组，表示从第i个字符开始的后缀排第j 
+int sa[MAX];   //后缀数组，表示排第j的是从第i个字符开始的后缀 
+int lcp[MAX];  //高度数组，表示排名相邻后缀的最长公共前缀
+
+int cmp(int i,int j)
+{ //比较rk[i],rk[i+k] 和 rk[j],rk[j+k]
+	if(rk[i]!=rk[j]) return rk[i]<rk[j];
+	else
+	{
+		int ri=i+k<=n ? rk[i+k]:-1;
+		int rj=j+k<=n ? rk[j+k]:-1;
+		return ri<rj;
+	}
+}
+
+void da(string s)
+{ //倍增算法求字符串s的后缀数组和名次数组 
+	int i,tmp[MAX+1]; //tmp为临时数组 
+	n=s.length();
+	for(i=0;i<=n;i++)
+	{ //初始长度为1，rk直接取字符的ASCII码
+		sa[i]=i;
+		rk[i]=i<n ? s[i]:-1; //rk[n]=-1，其他=s[i] 
+	}	
+	for(k=1;k<=n;k*=2) //k为全局变量 
+	{ //利用长度为k的排序结果对长度为2k的进行排序 
+		sort(sa,sa+n+1,cmp);
+		tmp[sa[0]]=0; //先在tmp中临时存储新计算的rk，再转存回rk中 
+		for(i=1;i<=n;i++)
+			tmp[sa[i]]=tmp[sa[i-1]]+(cmp(sa[i-1],sa[i]) ? 1:0);			
+		for(i=0;i<=n;i++) rk[i]=tmp[i];
+	}
+}
+
+void LCP(string s)
+{ //求高度数组,LCP：排名相邻后缀的最长公共前缀
+	int i;
+	int len=s.length();
+	for(i=0;i<=n;i++) rk[sa[i]]=i;
+	int h=0;
+	lcp[0]=0;
+	for(i=0;i<n;i++)
+	{ //计算字符串中从位置i开始的后缀及其在后缀数组中的前一个后缀的LCP 
+		int j=sa[rk[i]-1]; 
+		if(h>0) h--;  //将h先减去首字母的 1长度，在保持前缀相同的前提下不断增加 
+		for(;j+h<n && i+h<n;h++)
+			if(s[j+h]!=s[i+h]) break;
+		lcp[rk[i]-1]=h;
+	}
+}
+
+int contain(string s,string t)
+{ //利用二分搜索进行字符匹配
+	int a=0,b=s.length();
+	while(b-a>1)
+	{
+		int c=(a+b)/2;
+		//比较s从位置sa[c]开始，长度为t.length的子串与t
+		if(s.compare(sa[c],t.length(),t)<0) a=c;
+		else b=c;
+	}
+	//可以匹配返回1，不可以匹配返回0 
+	return s.compare(sa[b],t.length(),t)==0;
+}
+
+int main()
+{
+	int i,yn; 
+	string s,t;
+	cout<<"请输入主串:\n";
+	cin>>s;
+	cout<<"请输入模式串:\n";
+	cin>>t;
+	da(s);
+	cout<<"sa:"<<endl;
+	for(i=1;i<=s.length();i++) cout<<sa[i]+1<<' ';
+	cout<<endl;
+	cout<<"rank:"<<endl;
+	for(i=0;i<s.length();i++) cout<<rk[i]<<' ';
+	cout<<endl; 
+	LCP(s);
+	cout<<"lcp:"<<endl;
+	for(i=1;i<s.length();i++) cout<<lcp[i]<<' ';
+	cout<<endl;
+	yn=contain(s,t);
+	cout<<"yes or not="<<yn<<endl;
+	return 0;
+}
+/*
+aabaaaab
+abb
+*/

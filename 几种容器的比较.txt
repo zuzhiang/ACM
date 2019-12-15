@@ -1,0 +1,36 @@
+主要针对：vector向量容器、map映射容器和set集合容器
+
+三者都有且用法相同的有：
+1.clear()     清空整个容器
+2.empty()     判断容器是否为空
+3.size()      返回容器的大小
+4.begin()     返回容器开始处的指针
+5.end()       返回容器结束处的指针
+6.容器<数据类型1,2…>::iterator 迭代器名（如it）   定义容器的迭代器，相当于指针
+
+
+不同：
+
+vector容器：
+1.push_back(value)        将value存入vector容器的最后一个位置
+2.pop_back()              删除最后一个数据
+3.vector[index]           返回下标为index的值，只用于输出，不用于输入
+4.iterator用法有  it++和*it
+4.无count()函数
+
+map容器：
+1.map[key]                返回key（键）相对应的value（值）
+2.iterator用法有  it->first和it->second     分别对应键和值
+3.count(key)              返回key键的有无（个数）
+4.map[key]=value          插入一个键值对
+
+set容器:
+1.iterator用法有  it++和*it
+2.count(value)            返回value值的有无（个数）
+3.insert(value)           插入一个元素
+4.lower_bound（value）    返回第一个小于value的值  
+5.upper_bound (value)     返回第一个大于value的值
+
+
+
+

@@ -1,0 +1,33 @@
+map是一种映射关系，第一个为键，第二个为值，关键字唯一，map中的元素自动按关键字升序排列
+引用头文件：#include<map>
+
+声明：
+map<类型1，类型2> mp;
+
+插入键值对<a,b>：
+mp.insert(make_pair(a,b));
+mp[a]=b;
+
+获取键a对应的元素：
+类型2 x=mp[a];
+
+清空元素：
+mp.clear();
+
+获取容器大小:
+int size=mp.size();
+
+让关键字a出现的次数+1：
+mp[a]++;
+
+判断关键字a是否在容器中：
+int n=mp.count(a); //返回0或1
+
+定义迭代器：
+map<类型1，类型2>:: iterator it;
+
+用迭代器遍历遍历元素：
+for(it=mp.begin();it!=mp.end();it++)  
+{  
+	cout<<it->first<<"  "<<it->second<<endl;
+}

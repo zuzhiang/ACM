@@ -1,0 +1,11 @@
+利用KMP算法中的next值可以求出字符串的循环节，如ababab的循环节为ab，abcd的循环节为abcd。具体做法如下：
+    假设字符串的长度为len，next[len]为字符串的最后一个字符的下一个字符的next值（下标从0开始）.
+
+若len % ( len - next[len] ) == 0 && next[len] != 0 ,即字符串的长度是循环节长度的倍数，则说明字符串循环,而且
+循环节长度为:   len - next[len]
+循环次数为:     len / ( len - next[len])
+
+否则该字符串本身为一个循环节，循环节长度为len，循环次数为1，此时len-next[len]代表的意思不再是循环节的长度，而是……
+此时求最少补多少个字符可以变成循环节：设xlen=len-next[len]
+则 ans=xlen-(len-(len/xlen)*xlen) 或 ans=xlen-next[len]%xlen
+

@@ -1,0 +1,56 @@
+会在源地址改变要排序数组的值
+需要引入#include<algorithm>头文件
+需要使用命名空间：using namespace std
+Sort函数有三个参数：
+
+（1）第一个是要排序的数组的起始地址。
+
+（2）第二个是结束的地址（最后一位要排序的地址）
+
+（3）第三个参数是排序的方法(cmp)，可以是从大到小也可是从小到大，还可以不写第三个参数，此时默认的排序方法是从小到大排序。
+
+sort有默认的比较函数，默认是按升序排列，此时sort第三个参数不用写
+sort是qsort的升级版，如果能用sort尽量用sort，使用也比较简单
+例如：实现对a[20]数组20个元素的升序排列
+sort(a,a+20);
+
+若要实现降序排列,如对a[20]数组的20个元素降序排列
+需要自己编写一个比较函数来实现，接着调用三个参数的sort：sort(begin,end,compare)；
+int compare(int a,int b)
+{
+      return a<b;   //升序排列，如果改为return a>b，则为降序
+}
+sort(a,a+20,compare);
+
+(1)如果比较的数据是整数类型的：
+int cmp(int a,int b)
+{
+    return a>b; //降序,不可写为return a-b;
+}
+
+(2)如果比较的数据是整数类型的：
+int cmp(char a,char b)
+{
+    return a>b; //降序,不可写为return a-b;
+}
+
+(3)如果是比较的数据是结构体类型的,比如结构体名为:node，结构体元素为int a,b;结构体数组名为a
+struct node
+{
+    int a,b;
+} a[10];
+
+1.结构体一级排序（只针对结构体的一个元素排序）
+
+int cmp(node a,node b)
+{
+    return a.x>b.x; //对结构体x元素降序排列
+}
+
+2.结构体二级排序（以结构体的两个元素为参考排序，当第一元素不同时，先按第一元素排序；当第一元素相同时，按照第二元素排序）
+
+int cmp(node a,node b)
+{
+    if(a.x!=b.x) return a.x>b.x; //先以第一元素降序排列
+    else return a.y<b.y;  //当第一元素相同时，按第二元素升序排列
+}

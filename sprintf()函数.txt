@@ -1,0 +1,32 @@
+说明1：该函数包含在stdio.h的头文件中，使用时需要加入：#include <stdio.h>
+
+说明2：sprintf与printf函数的区别：二者功能相似，但是sprintf函数打印到字符串中，而printf函数打印输出到屏幕上。sprintf函数在我们完成其他数据类型转换成字符串类型的操作中应用广泛。
+
+说明3：sprintf函数的格式：int sprintf( char *buffer, const char *format [, argument,...] );
+除了前两个参数固定外，可选参数可以是任意个。buffer是字符数组名；format是格式化字符串（像："=%6.2f%#x%o",%与#合用时，自动在十六进制数前面加上0x）。只要在printf中可以使用的格式化字符串，在sprintf都可以使用。其中的格式化字符串是此函数的精华。
+
+说明4:可以控制精度
+char str[20];
+double f=14.309948;
+sprintf(str,"%6.2f",f);
+
+说明5：可以将多个数值数据连接起来。
+char str[20];
+int a=20984,b=48090;
+sprintf(str,"%d%d",a,b);
+str[]="2098448090"
+
+说明6：可以将多个字符串连接成字符串
+char str[20];
+char s1={'A','B','C'};
+char s2={'T','Y','X'};
+sprintf(str,"%.3s%.3s",s1,s2);
+%m.n在字符串的输出中，m表示宽度，字符串共占的列数；n表示实际的字符数。%m.n在浮点数中，m也表示宽度；n表示小数的位数。
+
+说明7：可以动态指定，需要截取的字符数
+char s1={'A','B','C'};
+char s2={'T','Y','X'};
+sprintf(str,"%.*s%.*s",2,s1,3,s2);     //s为ABTYX
+sprintf(s, "%*.*f", 10, 2, 3.1415926); 
+
+说明8：sprintf的返回值是字符数组中字符的个数，即字符串的长度，不用在调用strlen(s)求字符串的长度。

@@ -1,0 +1,8 @@
+声明：
+pair<类型1,类型2> p;
+
+赋值：
+p=make_pair(a,b);  其中a、b既可以是变量名也可以是立即数
+
+使用：
+通过pair的两个公有函数first和second访问两个元素, p.first=a;   p.second=b;

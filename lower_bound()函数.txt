@@ -1,0 +1,23 @@
+函数lower_bound()和函数upper_bound()为C++ STL里面的函数，用的时候只需要加上#include<algorithm> 当然还要加上C++的iostream和命名空间
+
+两者都是以二分查找为基础，用在一个有序的前闭后开的区间内，所以使用之前往往对容器进行排序。
+
+
+lower_bound()函数功能：
+返回查找元素的第一个可安插位置，也就是“元素值>=查找值”的第一个元素的位置
+
+具体用法：
+ans=*lower_bound(a,a+n,val)  其中a为数组名，n为数组元素个数，val为要查找的值，注意返回的为一个位置，加*号取得该位置的值
+
+如果只是求位置：pos=lower_bound(a,a+n,val)-a
+
+
+
+upper_bound()函数功能：
+返回查找元素的最后一个可安插位置，也就是“元素值>查找值”的第一个元素的位置
+
+具体用法：
+ans=*upper_bound(a,a+n,val)  其中a为数组名，n为数组元素个数，val为要查找的值，注意返回的为一个位置，加*号取得该位置的值
+
+如果只是求位置：pos=upper_bound(a,a+n,val)-a
+

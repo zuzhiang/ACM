@@ -1,0 +1,32 @@
+vector是一种容器，可以看做是动态的数组.
+引用头文件#include<vector>
+
+声明：
+vector<数据类型> vec;
+
+插入元素a：
+vec.push_back(a);
+
+获取容器大小：
+int size=vec.size();
+
+获取第i个元素：
+int x=vec[i];
+
+删除所有元素:
+vec.clear();
+
+删除最后一个元素：
+vec.pop_back();
+
+容器是否为空：
+vec.empty();
+
+迭代器声明：
+vector<数据类型>:: iterator it;
+
+用迭代器访问所有元素：
+for(it=vec.begin();it!=vector.end();it++)
+{
+	cout<<*it<<endl;
+}

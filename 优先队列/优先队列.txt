@@ -1,0 +1,59 @@
+普通的队列是一种先进先出的数据结构，元素在队列尾追加，而从队列头删除。在优先队列中，元素被赋予优先级。当访问元素时，具有最高优先级的元素最先删除。优先队列具有最高级先出 （first in, largest out）的行为特征。
+优先队列的原理是最小堆和最大堆，所以时间复杂度为O(n*logn)
+其作用是降低了在一个动态容器内查找最大值或最小值的时间。
+
+C++STL里面提供了优先队列的用法
+需要包括头文件#include<queue>
+
+主要操作有：
+top() 返回优先级最高的元素 
+pop() 删除第一个元素
+push() 加入一个元素
+empty() 是否为空
+size() 元素的个数
+
+应用：
+一、int、float、double型数据
+
+1.按优先级由高到低（从大到小）排列
+定义优先队列：
+priority_queue<int> Q;
+priority_queue<float> Q;
+priority_queue<double> Q;
+
+2.按优先级由低到高（从小到大）排列
+首先需要引入头文件#include<functional>
+定义优先队列：
+priority_queue<int，vector<int>,greater<int> > Q;
+priority_queue<float,vector<float>,greater<float> > Q;
+priority_queue<double,vector<double>,greater<double> > Q;
+注意：在greater<> 的右尖括号和priority的右尖括号之间一个有一个空格，否则会编译失败
+
+
+二、结构体类型数据
+
+如：
+struct node
+{
+	int x,y;
+}a[1000];
+
+1.按优先级由高到低（从大到小）排列
+定义优先队列：
+priority_queue<node> Q;
+定义比较函数：
+bool operator<(node a,node b)  //注意operator后面有个小于号
+{
+	return a.x<b.x;
+}
+
+2.按优先级由低到高（从小到大）排列
+定义优先队列：
+priority_queue<node> Q;
+定义比较函数：
+bool operator<(node a,node b)
+{
+	return a.x>b.x;
+}
+
+

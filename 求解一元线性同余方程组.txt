@@ -1,0 +1,31 @@
+假设同余方程组为:
+x=r1(mod a1)
+x=r2(mod a2)
+x=r3(mod a3) 
+  ……
+x=rn(mod an)
+
+m=[a1,a2,a2,…,an] 即最小公倍数，则仅存在一个小于m的非负数解
+
+代码实现：
+int solve()
+{
+    scanf("%d %d",&a1,&r1);
+    for(i=0;i<n;i++) //n为同余方程组的个数
+    {
+        scanf("%d %d",&a2,&r2);
+        a=a1;
+	b=a2;
+	c=r2-r1;
+	gcd=exGce(a,b,x,y);
+	flag=1;
+	if(c%gcd!=0) flag=0;  //无解
+	t=b/d;
+	x=x*c/gcd;
+	x=(x%t+t)%t;  //最小非负解
+	r1=a1*x+r1;   
+	a1=a1*(a2/d);
+    }
+    if(!flag) return -1; //返回-1，代表无解
+    return r1;  //返回r1，即方程组的解
+}

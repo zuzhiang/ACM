@@ -1,0 +1,7 @@
+需要包含头文件math.h
+
+向上取整函数 ans=ceil(n);
+
+向下取整函数 ans=floor(n);
+
+其中n是小数

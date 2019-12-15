@@ -1,0 +1,28 @@
+题目：
+有N种物品和一个容量为V的背包。第i种物品最多有num[i]件可用，每件费用是c[i]，价值是w[i]。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。 
+
+多重背包有三种解决办法，第一种是基本的动态规划思维解决，第二种是转化为01背包解决，第三种是时间复杂度为O(VN)的方法。
+
+状态转移为方程为：dp[i][v]=max(dp[i-1][v-k*c[i]]+k*w[i]) ,0<=k<=num[i]
+
+dp[i][v]表示前i种物品恰放入一个容量为v的背包的最大权值
+
+
+转化为01背包的解法：
+void Multiplepark(int val,int vol,int amount) 
+{ //参数：当前物品的价格、体积、数量
+	//如果放不下全部，则转化为完全背包求解
+	if(vol*amount>=W) Completepark(val,vol);
+	else //否则，转化为01背包求解 
+	{ //将cnt个相同物品分多组，每组1，2，4，8…个
+	  //类似于倍增法，最后剩下的可能不是2的次幂 
+		int k=1;
+		while(k<amount)
+		{
+			ZeroOnepark(k*val,k*vol);
+			amount-=k;
+			k<<=1;
+		}
+		if(amount>0) ZeroOnepark(amount*val,amount*vol);
+	}
+}

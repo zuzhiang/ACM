@@ -1,0 +1,34 @@
+使用该函数首先应在开头包含头文件#include<stdlib.h>和#include<time.h>
+
+在标准的C库中函数rand()可以生成0~RAND_MAX之间的一个随机数(整数)，其中RAND_MAX 是stdlib.h 中定义的一个整数，它与系统有关。
+
+为了使程序在每次执行时都能生成一个新序列的随机值，我们通常通过伪随机数生成器提供一粒新的随机种子。只要种子不同rand()函数就会产生不同的随机数序列。
+
+rand()%a      生成一个0~a-1的随机数
+
+rand()%(y-x+1)+x    生成一个x~y的随机数
+
+
+使用rand的流程可以总结为：
+
+1 调用srand(time(NULL))设置随机数种子。
+2 调用rand函数获取一个或一系列随机数。
+
+求多组随机数代码：
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+int main()
+{
+	int i,n;
+	srand(time(NULL));
+	for(i=0;i<50;i++)
+	{		
+		n=rand()%100+1;
+		printf("%d ",n);
+	}
+	printf("\n");
+	return 0;
+}
+
+/*注意srand(time(NULL))的位置在for循环的外面*/

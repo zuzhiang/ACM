@@ -1,0 +1,41 @@
+容斥原理满足奇加偶减。
+
+
+
+非递归版代码实现(原理是枚举集合的子集)：
+//代码中ans和tmp的值要根据题意改变
+LL solve(LL n,int m)
+{  //1到n中的所有数与n的m个质因子不互质的个数
+	LL i,j,ans,tmp,flag;
+	ans=0;
+	for(i=1;i<(LL)(1<<m);i++)
+	{ //用二进制来1,0来表示第几个素因子是否被用到
+		tmp=1;
+		flag=0; //记录奇数还是偶数个
+		for(j=0;j<m;j++)
+			if(i&((LL)(1<<j))) //j为子集的下标
+			{
+				flag++;
+				tmp*=fac[j];
+			}
+		//容斥原理，奇加偶减
+		if(flag&1) ans+=n/tmp;
+		else ans-=n/tmp;
+	}
+	return ans;
+}
+其中fac存储数字n的质因子，m为因子个数
+
+
+
+递归版代码实现：
+LL solve(int index,LL n)
+{ //1到n中的所有数与n的tol个质因子不互质的个数
+	LL i,ans;
+	ans=0;
+	for(i=index;i<tol;i++)
+		ans+=n/fac[i]-solve(i+1,n/fac[i]);
+	return ans;
+}
+
+其中fac存储数字n的质因子，tol为因子个数

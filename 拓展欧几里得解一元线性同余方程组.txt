@@ -1,0 +1,33 @@
+假设同余方程组为：
+	x=r1(mod a1)
+	x=r2(mod a2)
+	………………
+	x=rn(mod an)
+
+求此方程组小于m的非负整数解代码：
+
+int solve()
+{
+	int a,b,c,d,x,y,t,f;
+	int a1,a2,r1,a2;
+	f=1;
+	scanf("%d%d",&a1,&r1);
+	for(i=1;i<n;i++) 
+	{
+		scanf("%d%d",&a2,&r2);
+		a=a1;
+		b=a2;
+		c=r2-r1;
+		d=exGcd(a,b,x,y);
+		if(c%d!=0) return -1 //无解;
+		else 
+		{
+			t=b/d;
+			x=x*(c/d);
+			x=(x%t+t)%t;
+			r1=a1*x+r1;
+			a1=a1*(a2/d);
+		}			
+	}
+	return r1;			
+}

@@ -1,0 +1,67 @@
+顶点个数n
+（1）排序：
+    在点集Q中找最左下方的点p0，就是x坐标和y坐标都最小的点，其余的点计算它们的极坐标幅角，以幅角的非降序顺序来排序，如果有幅角相同的，最接近p0的优先。（这是《ACM程序设计培训教程》上的排序方法，由于看不懂什么是幅角，于是上网找了另一种排序方法，效果是一样的，具体见附）
+（2）扫描：
+    堆栈初始化为chs（n） = {pn-1, p0},栈顶指针ps初始化为1，按排序好的点，从p1到pn-1扫描，如果pi （i=1...n-1）和chs栈顶的两个元素（chs[sp-1],chs[sp]）的三角形符号是正的，说明chs[sp-1],chs[sp],pi是逆时针方向，形成的边是凸边，所以可以把pi加入栈，sp++，继续扫描后面的pi+1；如果三角形符号是负的，那chs[sp]不可能是凸包的极点，出栈，sp--，而pi仍旧是pi。下一轮仍旧是chs[sp-1],chs[sp], pi.
+ 
+附：矢量叉积
+   设有点p0(x0,y0),p1(x1,y1),p2(x2,y2).（p0p1）,（p0p2）是共p0的两条向量，叉积d = （p0p1）x(p0p2) = (x1-x0)*(y2-y0) - (x2-x0)*(y1-y0)
+   叉积的一个非常重要性质是可以通过它的符号判断两矢量相互之间的顺逆时针关系：
+若 d > 0 , 则(p0p1)在(p0p2)的顺时针方向。 
+若 d < 0 , 则(p0p1)在(p0p2)的逆时针方向。(图示方向)
+若 d = 0 , 则(p0p1)与(p0p2)共线，但可能同向也可能反向。
+
+
+struct Point  
+{  
+    double x,y;  
+};  
+  
+Point point[1003];  
+Point stack[1003];//把构成凸包的点存到stack中,存入点的个数为top个  
+int c,n,top;  
+double l,r;  
+  
+int multi(Point p0,Point p1,Point p2)  
+{  
+    return ((p1.x-p0.x)*(p2.y-p0.y)-(p2.x-p0.x)*(p1.y-p0.y));  
+}  
+  
+double dis(Point p1,Point p2)  
+{  
+    return sqrt((p1.x-p2.x)*(p1.x-p2.x)+(p1.y-p2.y)*(p1.y-p2.y));  
+}  
+  
+int cmp(Point a,Point b)  
+{  
+    if(multi(point[0],a,b)>0) return 1;  
+        if(multi(point[0],a,b)<0) return 0;  
+            if(dis(point[0],a)<dis(point[0],b))  
+                return 1;  
+                return 0;  
+}  
+void graham()  
+{  
+    int i,k=0;  
+    Point temp;  
+    for(i=1; i<n; i++)  
+        if((point[i].y<point[k].y)||((point[i].y==point[k].y)&&(point[i].x<point[k].x)))  
+            k=i;  
+    temp=point[0];  
+    point[0]=point[k];  
+    point[k]=temp;  
+    sort(point+1,point+n,cmp);//按极角的大小进行排序  
+    stack[0]=point[0];  
+    stack[1]=point[1];  
+   top=1;  
+   i=2;  
+     while(i<n)  
+    {  
+        if(multi(stack[top],stack[top-1],point[i])<=0)//AB x AC>0 AC在AB的逆时针方向  
+                                                       //AB x AC<0 AC在AB的顺时针方向  
+                                                       //AB x AC=0 ABC 共线  
+            stack[++top]=point[i++];  
+        else  
+            top--;  
+    }  
+}  

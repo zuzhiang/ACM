@@ -1,0 +1,29 @@
+双端队列不论在尾部或头部插入元素，都十分迅速。而在中间插入元素则会比较费时，因为必须移动中间其他的元素。同时双端队列是一种可以随机访问的数据类型。
+
+
+所需头文件：#include<deque>
+
+定义：
+1. deque<type> deq; //声明一个元素类型为type的双端队列
+2. deque<type> deq(size, value);  //声明一个元素类型为type、含有size个value元素的双端队列
+
+
+1. deq[ ]：用来访问双向队列中单个的元素。
+2. deq.front()：返回第一个元素的引用。
+3. deq.back()：返回最后一个元素的引用。
+4. deq.push_front(x)：把元素x插入到双向队列的头部。
+5. deq.pop_front()：弹出双向队列的第一个元素。
+6. deq.push_back(x)：把元素x插入到双向队列的尾部。
+7. deq.pop_back()：弹出双向队列的最后一个元素。
+8. deq.empty(): 查看双端队列是否为空
+9. deq.clear(): 清空双端队列
+10.deq.size(): 获得双端队列中元素的个数
+
+
+元素的遍历：
+deque<type>::iterator it;
+
+for(it=deq.begin();it!=deq.end();it++)
+{
+	cout<<*it<<endl;
+}

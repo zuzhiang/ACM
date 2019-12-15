@@ -1,0 +1,31 @@
+中国剩余定理（CRT）的表述如下
+ 
+设正整数m1,m2,m3,…,mk两两互素，则同余方程组
+ x=a1(mod m1)
+ x=a2(mod m2)
+ x=a3(mod m3)
+    ……
+ x=ak(mod mk)
+                              
+有整数解。并且在模M=m1*m2*m3*…*mk下的解是唯一的，解为
+x=(a1*M1*P1+a2*M2*P2+…+ak*Mk*Pk^(-1))mod M                               
+
+其中Mi=M/mi，而Pi为M模mi的逆元。
+
+//a为余数的数组，m为除数的数组
+int CRT(int a[],int m[],int n)   //n为个数
+{  
+    int M = 1;  
+    int ans = 0;  
+    for(int i=0; i<n; i++)  //求M=m1*m2*m3*…*mn
+        M *= m[i];  
+    for(int i=0; i<n; i++)  
+    {  
+        int x, y;  
+        int Mi = M / m[i];  
+        exGcd(Mi, m[i], x, y);  //拓展欧几里得算法求逆元
+        ans = (ans + Mi * x * a[i]) % M;  
+    }  
+    if(ans < 0) ans += M;
+    return ans;  
+}  

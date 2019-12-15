@@ -1,0 +1,7 @@
+函数名： atof
+功 能： 把字符串转换成浮点数
+名字来源：ascii to floating point numbers 的缩写
+用 法： double atof(const char *nptr);
+表头文件 #include <stdlib.h>
+
+函数说明 atof()会扫描参数nptr字符串，跳过前面的空格字符，直到遇上数字或正负符号才开始做转换，而再遇到非数字或字符串结束时('\0')才结束转换，并将结果返回。参数nptr字符串可包含正负号、小数点或E(e)来表示指数部分，如123.456或123e-2。

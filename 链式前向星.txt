@@ -1,0 +1,29 @@
+前向星是一种存储边信息的数据结构。优点是既可以方便遍历某个节点的相连节点又可以保存边的权值，同时还可以通过下标直接访问第i组数据。
+
+int head[maxn];   //以i为起点的第一条边存储的位置
+
+struct ndoe
+{
+	int next; //下一条边
+	int to;   //终点
+	int w;    //权值
+} edge[maxm]；
+
+其中edge[i].to表示第i条边的终点,edge[i].next表示与第i条边同起点的下一条边的存储位置,edge[i].w为边权值.head数组初始化为-1
+
+注意：存储的顺序和输入的顺序正好相反。
+
+加边函数：
+
+void add(int u,int v,int w)
+{
+	edge[cnt].to=v;
+	edge[cnt].w=w;
+	edge[cnt].next=head[u];
+	head[u]=cnt++;
+}
+
+访问节点u的所有后继节点：
+
+for(i=head[u];i!=-1;i=edge[i].next)
+
